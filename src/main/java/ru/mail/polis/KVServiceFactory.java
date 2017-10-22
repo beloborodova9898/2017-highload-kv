@@ -1,5 +1,7 @@
 package ru.mail.polis;
 
+import ru.mail.polis.beloborodova9898.MyDAO;
+import ru.mail.polis.beloborodova9898.MyService;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -47,7 +49,6 @@ final class KVServiceFactory {
             throw new IllegalArgumentException("Path is not a directory: " + data);
         }
 
-        // TODO: Implement me
-        throw new UnsupportedOperationException("Implement me!");
+        return new MyService(port, new MyDAO(data));
     }
 }
