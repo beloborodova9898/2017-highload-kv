@@ -10,11 +10,11 @@ import java.net.InetSocketAddress;
 import java.util.NoSuchElementException;
 import java.util.concurrent.Executors;
 
-public class MyService implements KVService {
+public class MyCacheService implements KVService {
     @NotNull
     private final HttpServer server;
     @NotNull
-    private final MyDAO dao;
+    private final MyCacheDAO dao;
 
     @NotNull
     private static String extractID(@NotNull final String string) {
@@ -27,7 +27,7 @@ public class MyService implements KVService {
     private static final int maxPutLength = 1024;
 
 
-    public MyService(int port, @NotNull final MyDAO daoInput, final boolean useExecutor) throws IOException {
+    public MyCacheService(int port, @NotNull final MyCacheDAO daoInput, final boolean useExecutor) throws IOException {
         server = HttpServer.create(new InetSocketAddress(port), 0);
         dao = daoInput;
 
@@ -35,10 +35,10 @@ public class MyService implements KVService {
             server.setExecutor(Executors.newFixedThreadPool(nThreads));
 
         server.createContext("/v0/status", httpExchange -> {
-                final String response = "ONLINE";
-                httpExchange.sendResponseHeaders(200, response.length());
-                httpExchange.getResponseBody().write(response.getBytes());
-                httpExchange.close();
+            final String response = "ONLINE";
+            httpExchange.sendResponseHeaders(200, response.length());
+            httpExchange.getResponseBody().write(response.getBytes());
+            httpExchange.close();
         });
 
         server.createContext("/v0/entity", httpExchange -> {
@@ -95,7 +95,7 @@ public class MyService implements KVService {
         });
     }
 
-    public MyService(int port, @NotNull final MyDAO daoInput) throws IOException {
+    public MyCacheService(int port, @NotNull final MyCacheDAO daoInput) throws IOException {
         this(port, daoInput, true);
     }
 

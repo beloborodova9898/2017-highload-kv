@@ -1,5 +1,7 @@
 package ru.mail.polis;
 
+import ru.mail.polis.beloborodova9898.MyCacheDAO;
+import ru.mail.polis.beloborodova9898.MyCacheService;
 import ru.mail.polis.beloborodova9898.MyDAO;
 import ru.mail.polis.beloborodova9898.MyService;
 import org.jetbrains.annotations.NotNull;
@@ -49,6 +51,10 @@ final class KVServiceFactory {
             throw new IllegalArgumentException("Path is not a directory: " + data);
         }
 
-        return new MyService(port, new MyDAO(data));
+        // V Выбрать нужное
+        // return new MyService(port, new MyDAO(data), false);
+        // return new MyService(port, new MyDAO(data), true);
+        // return new MyCacheService(port, new MyCacheDAO(data), false);
+         return new MyCacheService(port, new MyCacheDAO(data), true);
     }
 }
