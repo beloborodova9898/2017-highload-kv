@@ -1,11 +1,11 @@
 math.randomseed(os.time())
 
-c = 0
-ind0_100 = 0
+cnt = 0
 
 request = function()
-    local cmd = "/v0/entity?id=" .. c
+    local cmd = "/v0/entity?id=" .. cnt
     local data
+    local ind0_100 = cnt % 100
     local ind100_200 = ind0_100 + 100
 
     -- Записываем первые 100 файлов, они будут постоянно требоваться и не перезаписываться
@@ -42,8 +42,7 @@ request = function()
         end
     end
 
-    c = c + 1;
-    ind0_100 = ind0_100 % 100
+    cnt = cnt + 1;
 
     return wrk.format(method, cmd, nil, body)
 end
