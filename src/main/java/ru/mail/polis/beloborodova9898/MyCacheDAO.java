@@ -38,6 +38,7 @@ public  class MyCacheDAO {
         is.read(value);
         is.close();
 
+        if (cache.size() == cacheSize) cache.clear();
         cache.put(key, value);
         return value;
     }
